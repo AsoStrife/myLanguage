@@ -1,7 +1,7 @@
 <?
 	session_start();
 	
-	include ('class/language.php'); 
+	include ('class/myLanguage.php'); 
 
 	$thispage	= basename($_SERVER['PHP_SELF']);
 	

@@ -6,12 +6,12 @@
  * @version   Release: myLanguage 2013-11-01 1.0.0
  * @link	  http://webenterprises.it/
 **/
-class Language {
+class myLanguage {
 	
 /**** Start Customize Variable ****/
 	
 	// getcwd() -> PHP function to get automatic base_path . Add language path folder
-	private $LANGUAGE_PATH    	= 'C:\xampp\htdocs\myLanguage\language/';
+	private $LANGUAGE_PATH    	= 'basepath/of/your/site/language/';
 	
 	// This array contain all language supported in your site
     private $AVAIABLE_LANGUAGE   = array 
