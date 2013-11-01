@@ -1,8 +1,7 @@
 <?
-	//This page set the new language
 	session_start();
 	
-	include ('class/language.php'); 
+	include ('class/myLanguage.php'); 
 
 	$language	= new Language();
 	
