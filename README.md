@@ -16,13 +16,44 @@ Download and unzip the .zip archive
 Open /class/myLanguage.php file
 - At line 14 you need to set your base path with a language folder 
 - At line 17 add your supported language in 2 characters like
+
 	it => italian
+
 	en => english
+
 	de => german
+
 	fr => french
+
 	zh => chinese
  ecc..
+ 
 - At line 23 set your default language
 
 
+Now look the index.php file from line 1 to 22:
+<?
+	session_start();
+	
+	include ('class/myLanguage.php'); 
+
+	$thispage	= basename($_SERVER['PHP_SELF']);
+	
+	if(!isset($_SESSION['lang']))
+	{
+		$_SESSION['lang'] = get_language();	
+	}
+	
+	// Optional to generate a dynamic URL like : htttp://yoursite.com?language=en
+	// If you delete this IF all script work!
+	if(!isset($_GET['language']))
+	{
+		header("Location: $thispage?language=".$_SESSION['lang']);
+	}
+	
+	$language	= new Language();
+
+?>
+
+This is really important for proper initialization of the class.
 
