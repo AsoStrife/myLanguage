@@ -4,7 +4,7 @@ myLanguage
 PHP Class to create multi-language web sites!
 Version 1.0.0
 
-How do
+What is it myLanguage Class
 =
 This is a simple PHP class to create multi-language site. It's very simple to use and to install.
 You can translate your site into as many languages as you want without limitations.
@@ -23,4 +23,6 @@ Open /class/myLanguage.php file
 	zh => chinese
  ecc..
 - At line 23 set your default language
+
+
 
