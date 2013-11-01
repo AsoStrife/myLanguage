@@ -32,6 +32,7 @@ Open /class/myLanguage.php file
 
 
 Now look the index.php file from line 1 to 22:
+
 <?
 	session_start();
 	
@@ -52,8 +53,8 @@ Now look the index.php file from line 1 to 22:
 	}
 	
 	$language	= new Language();
-
 ?>
 
-This is really important for proper initialization of the class.
+This is very important for proper initialization of the class.
+
 
