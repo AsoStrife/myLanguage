@@ -33,7 +33,7 @@ Open /class/myLanguage.php file
 
 Now look the index.php file from line 1 to 22:
 
-<?
+
 	session_start();
 	
 	include ('class/myLanguage.php'); 
@@ -53,8 +53,10 @@ Now look the index.php file from line 1 to 22:
 	}
 	
 	$language	= new Language();
-?>
+	
 
-This is very important for proper initialization of the class.
+This is very important for proper initialization of the class, you need to include that code in all your page.
+
+To print a line use this command [ <?=$language->print_line('NAME_OF_VARIABLE');?> ]
 
 
