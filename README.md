@@ -6,10 +6,10 @@ Version 1.1.3
 
 Changelog
 -
-Bugfix and spelling correction
-Created the configuration file and implemented within the class
-Changed the name of the method print_line () in tr ()
-Simplified class initialization with another method
+- Bugfix and spelling correction
+- Created the configuration file and implemented within the class
+- Changed the name of the method print_line () in tr ()
+- Simplified class initialization with another method
 
 What is myLanguage Class
 -
