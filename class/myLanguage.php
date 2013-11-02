@@ -1,9 +1,9 @@
 <?php 
 /**
- * @author 		Corriga Andrea <andreacorriga@gmail.com>
- * @copyright 	2013 Corriga Andrea (http://webenterprises.it)
- * @license 	http://www.opensource.org/licenses/bsd-license.php New BSD Licence
- * @version 	1.1.0
+ * @author 		Corrriga Andrea <andreacorriga@gmail.com>
+ * @copyright 		2013 Corriga Andrea (http://webenterprises.it)
+ * @license 		http://www.opensource.org/licenses/bsd-license.php New BSD Licence
+ * @version 		1.1.0
  * @link 		http://webenterprises.it/
 **/
 class myLanguage {
