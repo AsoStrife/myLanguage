@@ -1,36 +1,26 @@
-<?
+<?php 
 /**
- * @author	Corriga Andrea <andreacorriga@gmail.com>
- * @copyright 2013 Corriga Andrea (http://webenterprises.it)
- * @license   http://www.opensource.org/licenses/bsd-license.php New BSD Licence
- * @version   Release: myLanguage 2013-11-01 1.0.0
- * @link	  http://webenterprises.it/
+ * @author		Corriga Andrea <andreacorriga@gmail.com>
+ * @copyright 	2013 Corriga Andrea (http://webenterprises.it)
+ * @license   	http://www.opensource.org/licenses/bsd-license.php New BSD Licence
+ * @version   	1.1.0
+ * @link	  	http://webenterprises.it/
 **/
 class myLanguage {
 	
-/**** Start Customize Variable ****/
-	
-	// getcwd() -> PHP function to get automatic base_path . Add language path folder
-	private $LANGUAGE_PATH    	= 'basepath/of/your/site/language/';
-	
-	// This array contain all language supported in your site
-    private $AVAIABLE_LANGUAGE   = array 
-										(
-											'it',
-											'en',
-										);
-	// Set your default language 									
-	private $DEFAULT_LANG		= 'en';
-	
-/**** END Customize Variable ****/
+	public function __construct()
+	{
+		$this->config 	= require_once('config/lang.php');
 
+		$this->baseUrl	= 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+	}
 
 	/**
 	 * This method return your browser language
 	 * If the language is not supported, return the default language
 	 * @return string
 	**/
-	private function get_language()
+	private function getLanguage()
 	{	
 		// Retrieve the languages ​​supported by your browser
 		$http_lang = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
@@ -38,21 +28,26 @@ class myLanguage {
 		$http_lang = strtolower(substr(chop($http_lang[0]),0,2));
 	
 		
-		if(in_array($http_lang, $this->AVAIABLE_LANGUAGE)) 	return $http_lang;	
-		
-		else 												return $this->DEFAULT_LANG;	
-		
+		if( in_array($http_lang, $this->config['available']) ) 
+		{
+			return $http_lang;	
+		}
+		else
+		{
+			return $this->config['default'];	
+		}
 	}
 
 	/**
 	 * Return your session language
 	 * @return string
 	**/
-	public function current_language()
+	public function currentLanguage()
 	{	
 		return $_SESSION['lang'];	
 		
 	}
+
 
 	/**
 	 * Load all your file language in your request language
@@ -60,17 +55,17 @@ class myLanguage {
 	**/
 	private function load()
 	{
-		$directory 	= $this->LANGUAGE_PATH.$this->current_language().'/';
+		$directory 	= $this->config['path'].$this->currentLanguage().'/';
 		
 		if ( is_dir( $directory ) ) 
 		{
-
 			if ($directory_handle = opendir($directory)) 
 			{
 				while ( ($file = readdir($directory_handle)) !== false )
 				 {
+				 	// Include all language file
 					if( (!is_dir($file)) & ($file!=".") & ($file!="..") )
-					include ($directory.$file);
+						include ($directory.$file);
 				}
 
 
@@ -85,9 +80,9 @@ class myLanguage {
 	* It is used if load() doesn't work. Load your default language file 
 	* @return string
 	*/
-	public function load_emergency()
+	private function loadEmergency()
 	{
-		$directory 	= $this->LANGUAGE_PATH.$this->DEFAULT_LANG.'/';
+		$directory 	= $this->config['path'].$this->config['default'].'/';
 		
 		if ( is_dir( $directory ) ) 
 		{
@@ -97,9 +92,9 @@ class myLanguage {
 				while ( ($file = readdir($directory_handle)) !== false )
 				 {
 					
-					//Se l'elemento trovato è diverso da una directory o dagli elementi . e .. lo visualizzo a schermo
+					// Include all language file 
 					if( (!is_dir($file)) & ($file!=".") & ($file!="..") )
-					include ($directory.$file);
+						include ($directory.$file);
 				}
 
 
@@ -115,7 +110,7 @@ class myLanguage {
 	* If default language doens't work print a empty line
 	* @return string
 	*/
-	public function print_line($input)
+	public function tr($input)
 	{
 		$this->line		= $input;
 		$lang			= $this->load();
@@ -142,17 +137,38 @@ class myLanguage {
 	* If the new language is not avaiable return default language
 	* @return string
 	*/
-	public function set_lang($newlang)
+	public function setLang($newlang)
 	{
-		if(in_array($newlang, $this->AVAIABLE_LANGUAGE))
+		if(in_array($newlang, $this->config['available']))
 		{
-			return $newlang;
+			$_SESSION['lang'] =  $newlang;
 		}
 		else
 		{
-			return $this->DEFAULT_LANG;
+			$_SESSION['lang'] =  $this->config['default'];
+		}
+
+		header("Location: ". $this->baseUrl ."?language=".$_SESSION['lang']);
+	}
+
+	/**
+	* Initialize the multi language site setting the session['lang'] 
+	* and if getULR is true refresh index.php with get parameters
+	*/
+	public function initializeLang()
+	{
+		if(!isset($_SESSION['lang']))
+		{
+			$_SESSION['lang'] = $language->get_language();	
+		}
+		
+		if($this->config['getUrl'])
+		{
+			if(!isset($_GET['language']))
+			{
+				header("Location: ". $this->baseUrl ."?language=".$_SESSION['lang']);
+			}
 		}
 	}
 }
 
-?> 

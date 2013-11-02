@@ -3,16 +3,6 @@
 	
 	include ('class/myLanguage.php'); 
 
-	$language	= new Language();
-	
-	if(isset($_GET['newlanguage'])):
-		
-		$_SESSION['lang']	= $language->set_lang($_GET['newlanguage']);
-		
-		header("Location: index.php");
-		
-	else:
-		header("Location: index.php");
-	endif;
-	
-?>
+	$language	= new myLanguage();
+
+	isset($_GET['newlanguage']) ? $language->setLang($_GET['newlanguage']) :header("Location: \ ");
