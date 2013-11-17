@@ -16,6 +16,11 @@ What is myLanguage Class
 This is a simple PHP class to create multi-language site. It's very simple to use and to install.
 You can translate your site into as many languages as you want without limitations.
 
+Why I've developed this Class?
+-
+To help all developers who needs to create a multi-language site quickly and easier in a short time. myLanguage is easily customizable thanks to a few lines of code that manage the translation process.
+To read all documentation, go to Github page (link on top).
+
 Install And configuration
 -
 Download and unzip the .zip archive
