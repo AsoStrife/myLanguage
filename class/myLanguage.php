@@ -117,7 +117,7 @@ class myLanguage {
 		
 		if(!isset($lang[$this->line]))
 		{
-			$lang		= $this->load_emergency();
+			$lang		= $this->loadEmergency();
 			
 			if(!isset($lang[$this->line]))
 			{
