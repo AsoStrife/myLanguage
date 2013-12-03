@@ -159,7 +159,7 @@ class myLanguage {
 	{
 		if(!isset($_SESSION['lang']))
 		{
-			$_SESSION['lang'] = $language->get_language();	
+			$_SESSION['lang'] = $this->getLanguage();	
 		}
 		
 		if($this->config['getUrl'])
