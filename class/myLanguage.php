@@ -3,7 +3,7 @@
  * @author Corrriga Andrea <me@andreacorriga.com>
  * @copyright 2013 Corriga Andrea (http://andreacorriga.com)
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD Licence
- * @version 1.1.0
+ * @version 1.2.4.2
  * @link http://andreacorriga.com
 **/
 class myLanguage {
@@ -106,6 +106,20 @@ class myLanguage {
 	}
 	
 	/**
+	* If you replace is TRUE change special characters in a corresponding html code
+	* @return string
+	*/
+	private function replaceString($input)
+	{
+		$this->line		= $input;
+
+		if($this->config['replace']) 
+			return str_replace($this->config['oldCharacters'], $this->config['newCharacters'], $this->line);
+		else
+			return $this->line;
+	}
+
+	/**
 	* Print your request variable. If load doesn't work, this method load the default language.
 	* If default language doens't work print a empty line
 	* @return string
@@ -124,13 +138,14 @@ class myLanguage {
 				$lang[$this->line] = '';
 			}
 			
-			return $lang[$this->line];
+			return $this->replaceString($lang[$this->line]);
 		}
 		else
 		{
-			return $lang[$this->line];
+			return $this->replaceString($lang[$this->line]);
 		}
 	}
+
 
 	/**
 	* It is used to set new language. Control if the language is avaiable.

@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	
 	include ('class/myLanguage.php'); 
@@ -33,6 +33,15 @@
     
 	<p> <a href="_set_lang.php?newlanguage=it"> <?=$language->tr('index_body_tr_it');?> </a> </p>
 	<p> <a href="_set_lang.php?newlanguage=en"> <?=$language->tr('index_body_tr_en');?> </a> </p>
-    
+
+	<p> <?=$language->tr('index_accent_test');?> </p>
+
+	<!-- Print line that exist only in Italian file -->
+	<p> " <?=$language->tr('index_only_it');?> " </p>
+	<!-- Print line that exist only in English file -->
+	<p> " <?=$language->tr('index_only_en');?> " </p>
+	<!-- Print line that not exist -->
+    <p> " <?=$language->tr('index_empty');?> " </p>
+
 </body>
 </html>

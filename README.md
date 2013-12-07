@@ -1,11 +1,26 @@
+
 myLanguage 
 ==========
 
 PHP Class to create multi-language web sites!
-Version 1.1.3
+Version 1.2.4.2
 
 Changelog
+=
+
+V 1.2.4.2
 -
+
+- Add new private method replaceString to manage special characters
+- Edit configuration file with with the addition of three new parameters
+- Edit structure of language file
+- Improved index.php with new examples
+- Improved documentation
+- Minor bugfix
+
+V.1.1.3.0
+-
+
 - Bugfix and spelling correction
 - Created the configuration file and implemented within the class
 - Changed the name of the method print_line () in tr ()
@@ -61,6 +76,8 @@ Now look the index.php file from line 1 to 10:
 This is very important for proper initialization of the class, you need to include that code in all your page.
 
 To print a line use this command  <?=$language->tr('NAME_OF_VARIABLE');?> 
+
+If the language variable doesn't exist in your selected language, the class try to print variable in default language. If default variable language doesn't exist class print a empty variable
 
 Language file
 -
