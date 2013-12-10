@@ -1,4 +1,3 @@
-
 myLanguage 
 ==========
 
@@ -7,6 +6,12 @@ Version 1.2.4.2
 
 Changelog
 =
+
+V 1.2.4.3
+-
+
+- Class bugfix, resolved bug infinite loop on homepage
+
 
 V 1.2.4.2
 -
