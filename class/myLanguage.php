@@ -13,6 +13,8 @@ class myLanguage {
 		$this->config 	= require_once('config/lang.php');
 
 		$this->baseUrl	= 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+
+		$this->page 	= basename($_SERVER['PHP_SELF']);
 	}
 
 	/**
@@ -163,7 +165,7 @@ class myLanguage {
 			$_SESSION['lang'] =  $this->config['default'];
 		}
 
-		header("Location: ". $this->baseUrl ."?language=".$_SESSION['lang']);
+		header("Location: ". $this->page ."?language=".$_SESSION['lang']);
 	}
 
 	/**
@@ -181,7 +183,7 @@ class myLanguage {
 		{
 			if(!isset($_GET['language']))
 			{
-				header("Location: ". $this->baseUrl ."?language=".$_SESSION['lang']);
+				header("Location: ". $this->page ."?language=".$_SESSION['lang']);
 			}
 		}
 	}
