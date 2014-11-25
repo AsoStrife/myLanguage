@@ -1,17 +1,18 @@
+
 myLanguage 
 ==========
 
 PHP Class to create multi-language web sites!
-Version 1.2.4.2
+Version 1.3.0.0
 
 Changelog
 =
 
-V 1.2.4.3
--
-
-- Class bugfix, resolved bug infinite loop on homepage
-
+V 1.3.0.0
+- Fixed seo problem, with .htaccess rewrite. No more Get param like page.php?language=en, now myLanguage use uri segment like /en/page.php
+- Add .htaccess file
+- Url Bugfix
+- Simplified installation
 
 V 1.2.4.2
 -
@@ -46,8 +47,8 @@ Install And configuration
 Download and unzip the .zip archive
 
 Open /congif/lang.php file
-- At line 9 you need to set your absolute base path with a language folder 
-- At line 11 add your supported language in 2 characters like
+- At line 10 you need to set your absolute base path with a language folder 
+- At line 1 add your supported language in 2 characters like
 
 	it => italian
 
@@ -60,23 +61,15 @@ Open /congif/lang.php file
 	zh => chinese
  ecc..
  
-- At line 15 set your default language
-- At line 17 boolean value, if you want create a special url with GET parameter like: index.php?language=en set this value TRUE else FALSE
-
+- At line 17set your default language
+- Copy .htaccess on your root 
 
 Now look the index.php file from line 1 to 10:
-
-
-	session_start();
 	
 	include ('class/myLanguage.php'); 
 	
-	$thispage	= basename($_SERVER['PHP_SELF']);
-	
 	$language	= new myLanguage();
-	
-	$language->initializeLang();
-	
+
 
 This is very important for proper initialization of the class, you need to include that code in all your page.
 
@@ -91,7 +84,13 @@ Look the language folder.
 
 Change language
 -
-_set_lang.php file deals to change your language site.
-You need to create a link width a get parameters "newlanguage" like this: www.yoursite.com/_set_lang.php?newlanguage=en
+You can use the method: changetLang('language') to generate a link to change language.
+For expample if we are on: wwww.expample.com/en/page.php we can generate a link using: "$language->changetLang('it');"
+This method only generate url string, so you need to write a code like this: "<a href="<?=$language->changetLang('it');?>"> Set italian lang </a>""
+
+Problem?
+-
+
+If you have a problem, send me an email on me@andreacorriga.com
 
 

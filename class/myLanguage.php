@@ -1,9 +1,9 @@
 <?php 
 /**
  * @author Corrriga Andrea <me@andreacorriga.com>
- * @copyright 2013 Corriga Andrea (http://andreacorriga.com)
- * @license http://www.opensource.org/licenses/bsd-license.php New BSD Licence
- * @version 1.2.4.3
+ * @copyright 2014 Corriga Andrea (http://andreacorriga.com)
+ * @license Free
+ * @version 1.3.0.0
  * @link http://andreacorriga.com
 **/
 class myLanguage {
@@ -15,6 +15,9 @@ class myLanguage {
 		$this->baseUrl	= 'http://'.$_SERVER['HTTP_HOST'].str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 
 		$this->page 	= basename($_SERVER['PHP_SELF']);
+
+		// Initialize class
+		$this->initializeLang();
 	}
 
 	/**
@@ -46,7 +49,7 @@ class myLanguage {
 	**/
 	public function currentLanguage()
 	{	
-		return $_SESSION['lang'];	
+		return $_GET['language'];	
 		
 	}
 
@@ -150,42 +153,30 @@ class myLanguage {
 
 
 	/**
-	* It is used to set new language. Control if the language is avaiable.
+	* It is used to generate a url to change language language. Control if the language is avaiable.
 	* If the new language is not avaiable return default language
 	* @return string
 	*/
-	public function setLang($newlang)
+	public function changetLang($l)
 	{
-		if(in_array($newlang, $this->config['available']))
-		{
-			$_SESSION['lang'] =  $newlang;
-		}
+		if(in_array($l, $this->config['available']))
+			return '/'.$l.'/'.basename($_SERVER['PHP_SELF']);
 		else
-		{
-			$_SESSION['lang'] =  $this->config['default'];
-		}
-
-		header("Location: ". $this->page ."?language=".$_SESSION['lang']);
+			return '/'.$this->config['default'].'/'.basename($_SERVER['PHP_SELF']);
 	}
 
 	/**
-	* Initialize the multi language site setting the session['lang'] 
-	* and if getULR is true refresh index.php with get parameters
+	* Initialize the multi language site
+	* If there no GET param, refresh the site. 
+	* If GET param is not correct, refresh with default language
 	*/
 	public function initializeLang()
-	{
-		if(!isset($_SESSION['lang']))
-		{
-			$_SESSION['lang'] = $this->getLanguage();	
-		}
-		
-		if($this->config['getUrl'])
-		{
-			if(!isset($_GET['language']))
-			{
-				header("Location: ". $this->page ."?language=".$_SESSION['lang']);
-			}
-		}
+	{	
+		if(!isset($_GET['language']))
+			header("Location: ".$this->getLanguage().'/' .$this->page);
+
+		if(!in_array($_GET['language'], $this->config['available']))
+			header("Location: ".'/'.$this->config['default'].'/'.basename($_SERVER['PHP_SELF']));
 	}
 }
 
