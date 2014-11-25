@@ -33,5 +33,6 @@
 	<!-- Print line that exist only in English file -->
 	<p> " <?=$language->tr('index_only_en');?> " </p>
 
+	<p> <a href="README.md"> README.md </a></p>
 </body>
 </html>
